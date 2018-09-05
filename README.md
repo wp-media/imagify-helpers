@@ -9,7 +9,7 @@ The plugins in this repository provide solutions for some of the more common use
 > - Helper Plugins, like Imagify, require PHP 5.4+.
 > - Helper Plugins by design don’t have version numbers, because we don’t maintain them on a regular basis.
 > - Helper Plugins provide a sustainable way to customize Imagify’s behaviour, because they’re easier to spot than code snippets hidden in functions.php.
-> - 🚀 **All plugins from this repository require [Imagify](https://wordpress.org/plugins/imagify/) to be up and running on your WordPress site.** If you don’t use Imagify on your WordPress site, don’t install any of these plugins.
+> - **All plugins from this repository require [Imagify](https://wordpress.org/plugins/imagify/) to be up and running on your WordPress site.** If you don’t use Imagify on your WordPress site, don’t install any of these plugins.
 > - ☝️ **Test before use!** We don’t maintain all of these helper plugins actively at all times; some may target older versions of Imagify, or of other plugins. Some may even become outdated over time.
 
 ## Table of contents
