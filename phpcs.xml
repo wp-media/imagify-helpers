@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<ruleset name="Imagify Helpers">
+	<description>Helper plugins for Imagify.</description>
+
+	<arg name="extensions" value="php"/>
+
+	<file>.</file>
+
+	<!-- Check for cross-version support for PHP 5.3 and higher + WP 4.0 and higher. -->
+	<config name="testVersion" value="5.3-"/>
+	<config name="minimum_supported_wp_version" value="4.0"/>
+
+	<!-- Run against the PHPCompatibility ruleset dedicated to WP. -->
+	<rule ref="PHPCompatibilityWP">
+		<include-pattern>*\.php$</include-pattern>
+	</rule>
+
+	<!-- Run against the WordPress ruleset. -->
+	<rule ref="WordPress">
+		<!--<exclude name="Generic.Arrays.DisallowShortArraySyntax" />-->
+		<exclude name="Generic.Formatting.MultipleStatementAlignment.IncorrectWarning"/><!-- Excluded as long as it doesn't ignore comments. -->
+		<exclude name="Generic.Formatting.MultipleStatementAlignment.NotSameWarning"/><!-- Too many false positives. -->
+		<exclude name="Generic.Functions.FunctionCallArgumentSpacing.TooMuchSpaceAfterComma"/><!-- Completely broken. -->
+		<exclude name="Squiz.Commenting.FileComment.Missing"/><!-- No thanks. -->
+		<exclude name="Squiz.PHP.EmbeddedPhp.ContentBeforeOpen"/><!-- No. Definitively, no. -->
+		<exclude name="Squiz.PHP.EmbeddedPhp.ContentAfterEnd"/><!-- Same. -->
+		<exclude name="Squiz.PHP.CommentedOutCode.Found"/><!-- Completely broken. -->
+		<exclude name="WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned"/><!-- Same. -->
+		<exclude name="WordPress.Arrays.MultipleStatementAlignment.LongIndexSpaceBeforeDoubleArrow"/><!-- Same. -->
+		<exclude name="WordPress.DB.DirectDatabaseQuery.DirectQuery"/><!-- LOL. Yeah, sure. -->
+		<exclude name="WordPress.DB.DirectDatabaseQuery.NoCaching"/><!-- Using static vars IS caching. -->
+		<exclude name="WordPress.WhiteSpace.OperatorSpacing.SpacingBefore"/><!-- Nope. Allow ternary tests to be aligned. -->
+		<exclude name="WordPress.WP.GlobalVariablesOverride.Prohibited"/><!-- And yet, we will if it is needed. -->
+	</rule>
+</ruleset>
