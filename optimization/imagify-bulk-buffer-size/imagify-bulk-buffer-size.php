@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Imagify | Change Bulk Buffer Size
- * Description: Helps to avoid CPU issues during bulk optimization.
- * Plugin URI:  https://github.com/wp-media/imagify-helpers/tree/master/optimization/imagify-bulk-buffer-size/
+ * Plugin Name:  Imagify | Change Bulk Buffer Size
+ * Description:  Helps to avoid CPU issues during bulk optimization.
+ * Plugin URI:   https://github.com/wp-media/imagify-helpers/tree/master/optimization/imagify-bulk-buffer-size/
  * Version:      1.1
  * Requires PHP: 5.3
  * Author:       Imagify Support Team

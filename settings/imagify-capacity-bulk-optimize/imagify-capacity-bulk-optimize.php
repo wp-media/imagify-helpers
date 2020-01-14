@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Bulk Optimize only for Super Admins (Multisite)
- * Description: Bumps up the default user capacity required for bulk-optimization to Super Admin on multisite.
- * Plugin URI:  https://github.com/wp-media/imagify-helpers/tree/master/settings/imagify-capacity/
+ * Plugin Name:  Bulk Optimize only for Super Admins (Multisite)
+ * Description:  Bumps up the default user capacity required for bulk-optimization to Super Admin on multisite.
+ * Plugin URI:   https://github.com/wp-media/imagify-helpers/tree/master/settings/imagify-capacity/
  * Version:      1.1
  * Requires PHP: 5.3
  * Author:       Imagify Support Team

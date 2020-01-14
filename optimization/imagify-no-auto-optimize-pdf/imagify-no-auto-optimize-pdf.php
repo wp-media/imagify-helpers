@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Imagify | No Auto-Optimization for PDFs
- * Description: Excludes PDF files from being auto-optimized once they’re uploaded.
- * Plugin URI:  https://github.com/wp-media/imagify-helpers/tree/master/optimization/imagify-no-auto-optimize-pdf/
+ * Plugin Name:  Imagify | No Auto-Optimization for PDFs
+ * Description:  Excludes PDF files from being auto-optimized once they’re uploaded.
+ * Plugin URI:   https://github.com/wp-media/imagify-helpers/tree/master/optimization/imagify-no-auto-optimize-pdf/
  * Version:      1.0.1
  * Requires PHP: 5.3
  * Author:       Imagify Support Team

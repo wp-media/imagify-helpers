@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Imagify | Reset Optimization Status
- * Description: Will “reset” Imagify’s optimization status in the database, so that previously optimized images will be considered not optimized. Physical image files will not actually be modified! How to use: 1. Activate plugin. 2. Reload plugin page once. 3. Deactivate plugin!
- * Plugin URI:  https://github.com/wp-media/imagify-helpers/tree/master/optimization/imagify-reset-optimization-status/
+ * Plugin Name:  Imagify | Reset Optimization Status
+ * Description:  Will “reset” Imagify’s optimization status in the database, so that previously optimized images will be considered not optimized. Physical image files will not actually be modified! How to use: 1. Activate plugin. 2. Reload plugin page once. 3. Deactivate plugin!
+ * Plugin URI:   https://github.com/wp-media/imagify-helpers/tree/master/optimization/imagify-reset-optimization-status/
  * Version:      1.0.1
  * Requires PHP: 5.3
  * Author:       Imagify Support Team
