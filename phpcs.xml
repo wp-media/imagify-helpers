@@ -22,6 +22,7 @@
 		<exclude name="Generic.Formatting.MultipleStatementAlignment.NotSameWarning"/><!-- Too many false positives. -->
 		<exclude name="Generic.Functions.FunctionCallArgumentSpacing.TooMuchSpaceAfterComma"/><!-- Completely broken. -->
 		<exclude name="Squiz.Commenting.FileComment.Missing"/><!-- No thanks. -->
+		<exclude name="Squiz.Commenting.FileComment.MissingPackageTag"/><!-- Duplicates namespace. -->
 		<exclude name="Squiz.PHP.EmbeddedPhp.ContentBeforeOpen"/><!-- No. Definitively, no. -->
 		<exclude name="Squiz.PHP.EmbeddedPhp.ContentAfterEnd"/><!-- Same. -->
 		<exclude name="Squiz.PHP.CommentedOutCode.Found"/><!-- Completely broken. -->

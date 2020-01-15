@@ -11,15 +11,13 @@
  * License URI:  http://www.gnu.org/licenses/gpl-2.0.html
  *
  * Copyright 2020 WP Media
- *
- * @package WP-Media\ImagifyPluginHelpers\BulkBufferSize
  */
 
-namespace ImagifyPluginHelpers\Optimization\BulkBufferSize;
+namespace WPMedia\ImagifyPluginHelpers\Optimization\BulkBufferSize;
 
-defined( 'ABSPATH' ) || die();
+defined( 'ABSPATH' ) || exit;
 
-add_filter( 'imagify_bulk_buffer_sizes', __NAMESPACE__ . '\buffer_sizes', 10, 3 );
+add_filter( 'imagify_bulk_buffer_sizes', __NAMESPACE__ . '\buffer_sizes' );
 /**
  * Allow only one optimization at the same time during bulk optimization, for all contexts.
  *

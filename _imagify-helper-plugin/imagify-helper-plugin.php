@@ -11,16 +11,14 @@
  * License URI:  http://www.gnu.org/licenses/gpl-2.0.html
  *
  * Copyright 2020 WP Media
- *
- * @package WP-Media\ImagifyPluginHelpers\Boilerplate
  */
 
 // EDIT THIS: Replace `boilerplate` with your custom subnamespace.
 // Namespaces must be declared before any other declaration.
-namespace ImagifyPluginHelpers\Boilerplate;
+namespace WPMedia\ImagifyPluginHelpers\Boilerplate\Example;
 
 // Standard plugin security, keep this line in place.
-defined( 'ABSPATH' ) || die();
+defined( 'ABSPATH' ) || exit;
 
 // Hooking into `imagify_loaded` is a safe way to make sure all Imagify features are available, however, it’s not required.
 // Using other hooks directly will be just fine in most cases.
@@ -36,5 +34,4 @@ add_action( 'imagify_loaded', __NAMESPACE__ . '\do_stuff' );
 function do_stuff() {
 	// Do something here.
 	add_filter( 'example_filter', 'example_function' );
-
 }

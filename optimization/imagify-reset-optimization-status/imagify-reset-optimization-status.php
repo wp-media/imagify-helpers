@@ -11,13 +11,11 @@
  * License URI:  http://www.gnu.org/licenses/gpl-2.0.html
  *
  * Copyright 2020 WP Media
- *
- * @package WP-Media\ImagifyPluginHelpers\ResetOptimizationStatus
  */
 
-namespace ImagifyPluginHelpers\Optimization\ResetOptimizationStatus;
+namespace WPMedia\ImagifyPluginHelpers\Optimization\ResetOptimizationStatus;
 
-defined( 'ABSPATH' ) || die();
+defined( 'ABSPATH' ) || exit;
 
 add_filter( 'init', __NAMESPACE__ . '\reset' );
 /**

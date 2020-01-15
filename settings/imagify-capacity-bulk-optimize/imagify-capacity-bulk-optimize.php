@@ -11,13 +11,11 @@
  * License URI:  http://www.gnu.org/licenses/gpl-2.0.html
  *
  * Copyright 2020 WP Media
- *
- * @package WP-Media\ImagifyPluginHelpers\BulkOptimUserCapacity
  */
 
-namespace ImagifyPluginHelpers\Settings\BulkOptimUserCapacity;
+namespace WPMedia\ImagifyPluginHelpers\Settings\BulkOptimUserCapacity;
 
-defined( 'ABSPATH' ) || die();
+defined( 'ABSPATH' ) || exit;
 
 add_action( 'imagify_loaded', __NAMESPACE__ . '\init' );
 /**

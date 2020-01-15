@@ -11,13 +11,11 @@
  * License URI:  http://www.gnu.org/licenses/gpl-2.0.html
  *
  * Copyright 2020 WP Media
- *
- * @package WP-Media\ImagifyPluginHelpers\NoAutoOptimPDF
  */
 
-namespace ImagifyPluginHelpers\Optimization\NoAutoOptimPDF;
+namespace WPMedia\ImagifyPluginHelpers\Optimization\NoAutoOptimPDF;
 
-defined( 'ABSPATH' ) || die();
+defined( 'ABSPATH' ) || exit;
 
 add_filter( 'imagify_auto_optimize_attachment', __NAMESPACE__ . '\no_optimize_pdf', 10, 2 );
 /**
@@ -36,7 +34,5 @@ function no_optimize_pdf( $optimize, $attachment_id ) {
 		return false;
 	}
 
-	$mime_type = get_post_mime_type( $attachment_id );
-
-	return 'application/pdf' !== $mime_type;
+	return 'application/pdf' !== get_post_mime_type( $attachment_id );
 }
