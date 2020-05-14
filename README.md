@@ -97,29 +97,33 @@ In this GitHub repository, plugins that address the same feature (cache, lazyloa
 
 It’s easy to over-engineer naming conventions, so we stick to a pragmatic rule of thumb when in doubt:
 
-1. Namespaces should be unique and consistent.
+1. Namespaces should be unique and consistent, and written in PascalCase.
 2. Function names should be descriptive.
 
 We rely on one consistent namespace for all Helper Plugins, and descriptive subnamespaces for each plugin:
 
 ```php
-namespace ImagifyPlugin\Helpers\{subnamespace(s)}
+namespace WPMedia\ImagifyPluginHelpers\{subnamespace(s)}
 ```
 
 Or more specifically:
 
 ```php
-namespace ImagifyPlugin\Helpers\{feature}\{what_this_plugin_does}
+namespace WPMedia\ImagifyPluginHelpers\{feature}\{what_this_plugin_does}
 ```
 
 Example:
 ```php
-namespace ImagifyPlugin\Helpers\optimization\auto;
+namespace WPMedia\ImagifyPluginHelpers\Optimization\NoAutoOptimPDF;
 
+add_action( 'init', __NAMESPACE__ . '\exclude_pdf' );
+
+/**
+ * Function doc.
+ */
 function exclude_pdf() {
     // Exclude PDF files from being auto-optimized upon upload.
 }
-add_action( 'init', __NAMESPACE__ . '\exclude_pdf' );
 ```
 
 ### 4.2. Naming placeholder URLs, domains, values
@@ -144,4 +148,4 @@ All plugins in this repository, like WordPress and Imagify, are licensed under [
 
 ## 6. Questions?
 
-Shoot us a message at: [imagify.io/contact/](https://imagify.io/contact/)
+Shoot us a message at: [imagify.io/contact/](https://imagify.io/contact/).
