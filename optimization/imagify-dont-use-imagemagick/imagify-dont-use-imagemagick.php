@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Imagify | Don't use ImageMagick
  * Description: Don't use the ImageMagick library to manipulate images (poor performances).
- * Plugin URI:  https://github.com/wp-media/imagify-helpers/tree/master/optimization/imagify-dont-use-imagick/
+ * Plugin URI:  https://github.com/wp-media/imagify-helpers/tree/master/optimization/imagify-dont-use-imagemagick/
  * Author:      WP Media
  * Author URI:  https://wp-media.me/
  * Licence:     GNU General Public License v2 or later
@@ -11,7 +11,7 @@
  * Copyright SAS WP Media 2020
  */
 
-namespace Imagify\Helpers\optimization\dont_use_imagick;
+namespace Imagify\Helpers\optimization\dont_use_imagemagick;
 
 // Standard plugin security, keep this line in place.
 defined( 'ABSPATH' ) || die();
