@@ -1,0 +1,304 @@
+@charset "UTF-8";
+
+/**
+ * ==== TABLE OF COLORS ===
+ *
+ * Red          : #DF3883;#
+ * RedDark      : #C51162;#
+ * Blue         : #40B1D0;#
+ * BlueDark     : #338EA6;#
+ * Green        : #8BC34A;#
+ * GreenDark    : #6F9C3B;#
+ * Dark         : #1F2332;#
+ * GrayLight    : #F2F5F7;#
+ * GrayMedium   : #65727C;#
+ * GrayDark     : #2E3243;#
+ *
+ */
+
+/**
+ * === Generics
+ */
+[class^="imgt-"],
+[class*=" imgt-"] {
+	box-sizing: border-box;
+}
+[class^="imgt-"] a,
+[class*=" imgt-"] a {
+	color: #338EA6;
+	font-weight: bold;
+}
+/* On text selection */
+[class^="imgt-"] ::selection {
+	background: #338EA6;
+	color: #FFF;
+}
+[class^="imgt-"] ::-moz-selection {
+	background: #338EA6;
+	color: #FFF;
+}
+
+/* Animations */
+[class^="imgt-"] a,
+[class^="imgt-"] button,
+[class^="imgt-"] input,
+[class^="imgt-"] .text {
+	transition: all .275s;
+	outline: none;
+	box-shadow: none;
+}
+
+/**
+ * === Buttons
+ */
+button.imgt-virgin {
+	padding: 0;
+	border: 0;
+	background: transparent;
+	height: auto;
+	box-shadow: none;
+	text-shadow: none;
+}
+.imgt-button.imgt-button,
+.imgt-button-primary.imgt-button-primary,
+.imgt-button-secondary.imgt-button-secondary,
+.imgt-button-tertiary.imgt-button-tertiary {
+	display: inline-block;
+	height: auto; /* Yeah 'cause WP locked it */
+	margin: .1em 0;
+	padding: 7px 20px 8px;
+	border: 0;
+	font-size: 14px;
+	line-height: 1.5;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #FFF;
+	text-decoration: none;
+	text-shadow: none;
+	background: #65727C;
+	box-shadow: none;
+	white-space: nowrap;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-appearance: none;
+	cursor: pointer;
+}
+.imgt-button.imgt-button:hover,
+.imgt-button.imgt-button:focus,
+.imgt-button-primary.imgt-button-primary:hover,
+.imgt-button-primary.imgt-button-primary:focus,
+.imgt-button-secondary.imgt-button-secondary:hover,
+.imgt-button-secondary.imgt-button-secondary:focus,
+.imgt-button-tertiary.imgt-button-tertiary:hover,
+.imgt-button-tertiary.imgt-button-tertiary:focus {
+	color: #FFF;
+	background: #2E3243;
+}
+[class^="imgt-button-"]::-moz-focus-inner,
+.imgt-button::-moz-focus-inner {
+	padding: 0;
+	border: 0
+}
+.imgt-button .text,
+[class^="imgt-button-"] .text {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+/* Disabled */
+[class*="imgt-button"].disabled,
+[class*="imgt-button"]:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+/* Not important */
+.imgt-button.imgt-button.light {
+	background: #ADB1B7;
+}
+.imgt-button.imgt-button.light:hover,
+.imgt-button.imgt-button.light:focus {
+	background: #2E3243;
+}
+
+/* Button Colors */
+.imgt-button-primary.imgt-button-primary {
+	background: #40B1D0;
+}
+.imgt-button-primary.imgt-button-primary:hover,
+.imgt-button-primary.imgt-button-primary:focus {
+	background: #338EA6;
+}
+.imgt-button-secondary.imgt-button-secondary {
+	background: #DF3883;
+}
+.imgt-button-secondary.imgt-button-secondary:hover,
+.imgt-button-secondary.imgt-button-secondary:focus {
+	background: #C51162;
+}
+
+/* Buttons sizes */
+.imgt-button-mini.imgt-button-mini {
+	font-size: 11px;
+	padding: 2px 10px 3px;
+	letter-spacing: 0.125em;
+}
+.imgt-button-big.imgt-button-big {
+	font-size: 18px;
+}
+
+/* Specific buttons */
+.imgt-wrap > .imgt-button-uninstall {
+	margin-top: 16px;
+	margin-right: 12px;
+}
+
+/**
+ * === Flexbox
+ */
+.imgt-flex,
+.imgt-flex-spaced {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.imgt-flex > * {
+	flex-grow: 1;
+}
+.imgt-flex > * {
+	margin: 0;
+}
+
+/**
+ * === Containers
+ */
+.imgt-wrap {
+	clear: both;
+}
+[id="screen-meta-links"] + .imgt-wrap {
+	margin-top: 40px;
+}
+
+/**
+ * === Headers
+ */
+.imgt-wrap .imgt-page-title {
+	padding: 20px 12px;
+	background: #2E3243;
+	color: #F2F5F7;
+}
+
+/* Quick actions part */
+.imgt-wrap .tablenav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.imgt-logs-list .tablenav .imgt-quick-actions {
+	margin: 0 auto;
+}
+
+/**
+ * === Contents
+ */
+.imgt-wrap pre {
+	width: 100%;
+	margin: 0;
+	overflow-x: auto;
+}
+
+.imgt-small-info {
+	font-weight: bold;
+	font-size: .7rem;
+	color: #65727C;
+	opacity: .9;
+}
+.row-error .imgt-small-info {
+	color: #fff;
+}
+
+/**
+ * === Tables
+ */
+.imgt-wrap thead th[scope="col"],
+.imgt-wrap tfoot th[scope="col"] {
+	padding: 12px 10px;
+	text-transform: uppercase;
+	letter-spacing: .04em;
+	font-weight: bold;
+	background: #2E3243;
+	color: #F2F5F7;
+}
+.imgt-wrap thead th[scope="col"] {
+	background: #1F2332;
+}
+.imgt-wrap thead th[scope="col"] {
+	border-bottom: 0;
+}
+.imgt-wrap tfoot th[scope="col"] {
+	border-top: 0;
+}
+.imgt-wrap .wp-list-table {
+	border-bottom: 0;
+}
+.imgt-wrap .wp-list-table thead tr > *,
+.imgt-wrap .wp-list-table tfoot tr > * {
+	padding: 8px 10px;
+	background: #1F2332;
+	color: #F2F5F7;
+	border-bottom: 0;
+	border-top: 0;
+}
+.imgt-wrap .wp-list-table .sorting-indicator:before {
+	color: #FFF;
+}
+.imgt-wrap .wp-list-table #cb {
+	padding: 8px 4px;
+}
+.imgt-wrap .wp-list-table thead a,
+.imgt-wrap .wp-list-table tfoot a {
+	color: inherit;
+}
+.imgt-wrap .wp-list-table,
+.imgt-wrap .widefat {
+	border-top: 0;
+	width: calc(100% + 2px);
+	margin: 0 -1px;
+}
+.imgt-wrap .row-group-title th {
+	border-top: 25px solid #FFF;
+	background: #338EA6;
+	color: #F2F5F7;
+	font-weight: bold;
+}
+.imgt-wrap tbody > .row-group-title:first-child th {
+	border-top: 0;
+}
+
+.imgt-wrap tr + tr > th,
+.imgt-wrap tr + tr > td {
+	border-top: 1px solid #e5e5e5;
+}
+.imgt-wrap .row-error th,
+.imgt-wrap .row-error td {
+	color: #fff;
+	font-weight: bold;
+	background: #C51162;
+}
+.imgt-wrap .widefat table {
+	width: 100%;
+	table-layout: fixed;
+}
+.imgt-wrap .widefat table th,
+.imgt-wrap .widefat table td {
+	padding-left: 0;
+	padding-right: 0;
+}
+.imgt-wrap .widefat table tr:first-child th,
+.imgt-wrap .widefat table tr:first-child td {
+	padding-top: 0;
+}
+.imgt-wrap .widefat table tr:last-child th,
+.imgt-wrap .widefat table tr:last-child td {
+	padding-bottom: 0;
+}
