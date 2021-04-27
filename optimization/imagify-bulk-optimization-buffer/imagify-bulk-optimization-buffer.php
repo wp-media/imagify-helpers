@@ -22,4 +22,4 @@ function buffer_sizes( $buffer_sizes ) {
 	}
 	return array_fill_keys( array_keys( $buffer_sizes ), 1 );
 }
-add_filter( 'imagify_bulk_buffer_sizes', __NAMESPACE__ . '\buffer_sizes' );
+add_filter( 'imagify_bulk_buffer_sizes', __NAMESPACE__ . '\bulk_optimization_buffer' );
