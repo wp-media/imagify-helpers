@@ -1,4 +1,4 @@
-# Imagify | Bulk Optimize only for Super Admins (Multisite)
+# Imagify | Capacity Bulk Optimizer (Multisite)
 
 Bumps up the default user capacity required for bulk-optimization to Super Admin on multisite.
 
