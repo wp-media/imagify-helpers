@@ -11,7 +11,7 @@
  * Copyright SAS WP Media 2019
  */
 
-namespace ImagifyPlugin\Helpers\optimization\change_bulk_buffer_size;
+namespace ImagifyPlugin\Helpers\optimization\bulk_optimization_buffer;
 
 // Standard plugin security, keep this line in place.
 defined( 'ABSPATH' ) || die();
