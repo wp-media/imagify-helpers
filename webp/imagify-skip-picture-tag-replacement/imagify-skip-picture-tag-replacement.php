@@ -32,12 +32,16 @@ function skip_picture_tag_replacement( $images ) {
   );
 
   foreach ( $images as $i => $image ) {
-    if ( $image[ 'attributes' ][ 'data-skip-picture-replacement' ] === 'yes' ) {
-      unset( $images[ $i ] );
-    }
-    foreach( $classes_to_skip as $class_to_skip ) {
-      if ( preg_match( "/\b{$class_to_skip}\b/", $image[ 'attributes' ][ 'class' ] ) ) {
+    if ( isset( $image[ 'attributes' ][ 'data-skip-picture-replacement' ] ) ) {
+      if ( $image[ 'attributes' ][ 'data-skip-picture-replacement' ] === 'yes' ) {
         unset( $images[ $i ] );
+      }
+    }
+    if ( isset( $image[ 'attributes' ][ 'class' ] ) ) {
+      foreach( $classes_to_skip as $class_to_skip ) {
+        if ( preg_match( "/\b{$class_to_skip}\b/", $image[ 'attributes' ][ 'class' ] ) ) {
+          unset( $images[ $i ] );
+        }
       }
     }
   }
