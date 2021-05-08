@@ -11,7 +11,7 @@
  * Copyright SAS WP MEDIA 2020
  */
 
-namespace ImagifyPlugin\Helpers\various\imagify_beat_control;
+namespace ImagifyPlugin\Helpers\various\beat_control;
 
 // Standard plugin security, keep this line in place.
 defined( 'ABSPATH' ) || die();
