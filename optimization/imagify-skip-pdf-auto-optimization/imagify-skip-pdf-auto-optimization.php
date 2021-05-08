@@ -27,7 +27,7 @@ defined( 'ABSPATH' ) || die();
  * @param  array $metadata      An array of attachment meta data.
  * @return bool
  */
-function no_optimize_pdf( $optimize, $attachment_id, $metadata ) {
+function no_auto_optimize_pdf( $optimize, $attachment_id, $metadata ) {
 	if ( ! $optimize ) {
 		return false;
 	}
@@ -36,4 +36,4 @@ function no_optimize_pdf( $optimize, $attachment_id, $metadata ) {
 
 	return 'application/pdf' !== $mime_type;
 }
-add_filter( 'imagify_auto_optimize_attachment', __NAMESPACE__ . '\skip_pdf_auto_optimization', 10, 3 );
+add_filter( 'imagify_auto_optimize_attachment', __NAMESPACE__ . '\no_auto_optimize_pdf', 10, 3 );
