@@ -16,10 +16,10 @@ namespace ImagifyPlugin\Helpers\optimization\bulk_optimization_buffer;
 // Standard plugin security, keep this line in place.
 defined( 'ABSPATH' ) || die();
 
-function buffer_sizes( $buffer_sizes ) {
+function change_buffer_size( $buffer_sizes ) {
 	if ( ! $buffer_sizes || ! is_array( $buffer_sizes ) ) {
 		return [];
 	}
 	return array_fill_keys( array_keys( $buffer_sizes ), 1 );
 }
-add_filter( 'imagify_bulk_buffer_sizes', __NAMESPACE__ . '\bulk_optimization_buffer' );
+add_filter( 'imagify_bulk_buffer_sizes', __NAMESPACE__ . '\change_buffer_size' );
