@@ -23,7 +23,7 @@ defined( 'ABSPATH' ) || die();
  *
  * @param string $root_path Path to the site's root. Default is null.
  */
-function custom_site_root( $root_path ) {
+function custom_site_root_path( $root_path ) {
 	$upload_basedir = imagify_get_filesystem()->get_upload_basedir( true );
 
 	if ( strpos( $upload_basedir, '/wp-content/' ) === false ) {
@@ -35,4 +35,4 @@ function custom_site_root( $root_path ) {
 
 	return trailingslashit( $upload_basedir );
 }
-add_filter( 'imagify_site_root', __NAMESPACE__ . '\custom_site_root', 10001 );
+add_filter( 'imagify_site_root', __NAMESPACE__ . '\custom_site_root_path', 10001 );
