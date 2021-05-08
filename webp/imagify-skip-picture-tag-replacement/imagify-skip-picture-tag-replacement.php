@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || die();
  *
  * @author Joe DiSalvo
  */
-function skip_picture_tag_replacement( $images ) {
+function find_images_to_skip( $images ) {
 
   // Classes to target for exclusion from picture tag replacement
   $classes_to_skip = array(
@@ -47,4 +47,4 @@ function skip_picture_tag_replacement( $images ) {
   }
   return $images;
 }
-add_filter( 'imagify_webp_picture_images_to_display', __NAMESPACE__ . '\skip_picture_tag_replacement' );
+add_filter( 'imagify_webp_picture_images_to_display', __NAMESPACE__ . '\find_images_to_skip' );
