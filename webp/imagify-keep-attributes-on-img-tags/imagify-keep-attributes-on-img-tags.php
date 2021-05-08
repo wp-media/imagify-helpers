@@ -31,7 +31,7 @@ add_filter( 'imagify_picture_attributes', __NAMESPACE__ . '\keep_attributes_off_
  *
  * @author Joe DiSalvo
  */
-function keep_attributes_on_img_tags ( $attributes, $image ) {
+function prep_attributes_for_img_tags ( $attributes, $image ) {
 	if ( is_array( $image ) && is_array( $image['attributes'] ) ) {
 		foreach( $image['attributes'] as $attribute => $attribute_val ) {
 			$attributes[$attribute] = $attribute_val;
@@ -39,4 +39,4 @@ function keep_attributes_on_img_tags ( $attributes, $image ) {
 		return $attributes;
 	}
 }
-add_filter( 'imagify_picture_img_attributes', __NAMESPACE__ . '\keep_attributes_on_img_tags', 10, 2 );
+add_filter( 'imagify_picture_img_attributes', __NAMESPACE__ . '\prep_attributes_for_img_tags', 10, 2 );
