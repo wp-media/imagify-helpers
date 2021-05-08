@@ -12,7 +12,7 @@
  */
 
 // Namespaces must be declared before any other declaration.
-namespace ImagifyPlugin\Helpers\settings\imagify_capacity_bulk_optimizer;
+namespace ImagifyPlugin\Helpers\settings\capacity_bulk_optimizer;
 
 // Standard plugin security, keep this line in place.
 defined( 'ABSPATH' ) or die();
