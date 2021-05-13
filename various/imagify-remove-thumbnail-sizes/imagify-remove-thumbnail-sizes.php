@@ -27,7 +27,7 @@ add_filter( 'big_image_size_threshold', '__return_false' );
 
 add_filter(
 	'intermediate_image_sizes_advanced',
-	function() use ( $thumb_names ) {
+	function( $sizes ) use ( $thumb_names ) {
 		foreach ( $thumb_names as $thumb_name ) {
 			unset( $sizes[$thumb_name] );
 		}
