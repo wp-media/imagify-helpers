@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Imagify | Keep Attributes On &lt;img&gt; Tags
  * Description: Keeps attributes on &lt;img&gt; tags rather than moving them to picture tags.
- * Plugin URI:  https://github.com/wp-media/imagify-helpers/tree/master/optimization/imagify-keep-attributes-on-img-tags/
+ * Plugin URI:  https://github.com/wp-media/imagify-helpers/tree/master/webp/imagify-keep-attributes-on-img-tags
  * Author:      WP Media
  * Author URI:  https://wp-media.me/
  * Licence:     GNU General Public License v2 or later
