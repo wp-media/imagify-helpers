@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Imagify | Skip &lt;picture&gt; Tag Replacement
  * Description: Excludes &lt;img&gt; tags from &lt;picture&gt; tag replacement for WebP display if they have either a data-skip-picture-replacement="yes" attribute or "skip-picture-replacement" class. Can be edited to target other classes for exclusion.
- * Plugin URI:  https://github.com/wp-media/imagify-helpers/tree/master/optimization/imagify-skip-picture-tag-replacement/
+ * Plugin URI:  https://github.com/wp-media/imagify-helpers/tree/master/webp/imagify-skip-picture-tag-replacement
  * Author:      WP Media
  * Author URI:  https://wp-media.me/
  * Licence:     GNU General Public License v2 or later
