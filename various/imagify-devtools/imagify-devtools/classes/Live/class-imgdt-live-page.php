@@ -72,8 +72,8 @@ class IMGDT_Live_Page {
 	public function register_page(): void {
 		$hook = add_submenu_page(
 			null,
-			'Imagify DevTools — Live',
-			'Imagify DevTools — Live',
+			__( 'Imagify DevTools — Live', 'imagify-devtools' ),
+			__( 'Imagify DevTools — Live', 'imagify-devtools' ),
 			apply_filters( 'imgdt_capability', IMGDT_CAPABILITY ),
 			self::SLUG,
 			array( $this, 'render' )

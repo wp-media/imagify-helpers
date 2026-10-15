@@ -67,15 +67,9 @@ class IMGDT_Triage_Builder {
 	}
 
 	/**
-	 * Build the requests card. Blocked checks are grouped by category —
-	 * "external" (genuine outbound requests to Imagify, fixed by whitelisting
-	 * Imagify's domains) vs. "loopback" (the site calling its own
-	 * admin-ajax.php/admin-post.php/wp-cron.php, fixed on the
-	 * hosting/firewall/security-plugin/CDN side — whitelisting Imagify does
-	 * nothing for this one) — so which fix applies is visible without
-	 * reading each blocked URL. Each blocked line also names Cloudflare
-	 * directly when its own response headers confirm it (`cf-mitigated`/
-	 * `cf-ray`), instead of leaving that to be inferred.
+	 * Build the requests card. Blocked checks are grouped as External
+	 * (Imagify's servers) or Loopback (the site's own endpoints), each with
+	 * a Cloudflare note when the response headers show one.
 	 *
 	 * @since 0.2.0
 	 *
@@ -112,9 +106,7 @@ class IMGDT_Triage_Builder {
 			);
 
 			if ( 'external' === $category && $blocked_by_constant ) {
-				// Plain text: this detail is escaped as a whole on output, same as every
-				// other Triage card detail — no inline HTML here (unlike Full Diagnostics
-				// rows, which render `more_info` unescaped).
+				// Plain text: Triage details are escaped as a whole on output.
 				$header .= ' — ' . sprintf(
 					/* translators: %s is a constant name. */
 					__( 'confirmed cause: %s', 'imagify-devtools' ),
@@ -203,15 +195,9 @@ class IMGDT_Triage_Builder {
 	}
 
 	/**
-	 * Build the "prefer GD" switch for the Image editor card, if it applies.
-	 *
-	 * Shown only when either the override is already on (so it can be
-	 * turned back off), or the site is currently, naturally selecting
-	 * core's own Imagick class and GD is available to switch to. Never
-	 * shown for a third-party plugin's own editor class (e.g. FooGallery's,
-	 * Jetpack's) — this override only ever touches the literal core
-	 * `WP_Image_Editor_Imagick` class, so offering it anywhere else would
-	 * promise something it can't do.
+	 * Build the "prefer GD" switch for the Image editor card. Shown when the
+	 * override is already on, or when core's own Imagick editor is selected
+	 * and GD is available; never for a third-party editor class.
 	 *
 	 * @since 0.2.0
 	 *

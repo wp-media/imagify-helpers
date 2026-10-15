@@ -76,16 +76,13 @@ class IMGDT_Provider_Requests implements IMGDT_Diagnostics_Provider {
 	}
 
 	/**
-	 * URLs and methods this provider checks. Each is tagged with a category:
-	 * 'external' for genuine outbound requests to Imagify's own servers
-	 * (fixed by whitelisting Imagify's domains), 'loopback' for the site
-	 * calling its own admin-ajax.php/admin-post.php/wp-cron.php (fixed on
-	 * the hosting/firewall/security-plugin/CDN side — whitelisting Imagify
-	 * does nothing for this one).
+	 * URLs and methods this provider checks. Categories: 'external' for
+	 * requests to Imagify's servers, 'loopback' for the site's own
+	 * admin-ajax.php, admin-post.php and wp-cron.php.
 	 *
 	 * @since 0.2.0
 	 *
-	 * @return array<array{url: string, method: string, category: string}>
+	 * @return array<array{url: string, method: string, category: string, body?: array}>
 	 */
 	private function get_checks(): array {
 		$checks = array(
@@ -101,17 +98,19 @@ class IMGDT_Provider_Requests implements IMGDT_Diagnostics_Provider {
 			),
 		);
 
-		foreach (
-			array(
-				admin_url( 'admin-ajax.php?action=imgdt_connectivity_test' ),
-				admin_url( 'admin-post.php?action=imgdt_connectivity_test' ),
-				site_url( 'wp-cron.php' ),
-			) as $url
-		) {
+		$loopback = array(
+			admin_url( 'admin-ajax.php?action=imgdt_connectivity_test' ) => array(),
+			admin_url( 'admin-post.php?action=imgdt_connectivity_test' ) => array(),
+			// wp-cron.php exits before running any event when the POST has a body.
+			site_url( 'wp-cron.php' ) => array( 'imgdt_connectivity_test' => '1' ),
+		);
+
+		foreach ( $loopback as $url => $body ) {
 			$checks[] = array(
 				'url'      => $url,
 				'method'   => 'POST',
 				'category' => 'loopback',
+				'body'     => $body,
 			);
 		}
 
@@ -119,10 +118,8 @@ class IMGDT_Provider_Requests implements IMGDT_Diagnostics_Provider {
 	}
 
 	/**
-	 * Short, plain-text note appended to a loopback check's label — these
-	 * carry this plugin's own user-agent, not a plain default WP request, so
-	 * a block here means "this specific request is blocked," not
-	 * necessarily "every kind of self-triggered WP traffic is blocked."
+	 * Short note appended to a loopback check's label: these requests use
+	 * this plugin's own user-agent, not a default WordPress request.
 	 *
 	 * @since 0.2.0
 	 *
@@ -167,7 +164,7 @@ class IMGDT_Provider_Requests implements IMGDT_Diagnostics_Provider {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param array{url: string, method: string, category: string} $check One entry from get_checks().
+	 * @param array{url: string, method: string, category: string, body?: array} $check One entry from get_checks().
 	 * @return IMGDT_Diagnostic_Row
 	 */
 	private function build_row( array $check ): IMGDT_Diagnostic_Row {
@@ -240,7 +237,7 @@ class IMGDT_Provider_Requests implements IMGDT_Diagnostics_Provider {
 	 *
 	 * @since 0.2.0
 	 *
-	 * @param array{url: string, method: string, category: string} $check One entry from get_checks().
+	 * @param array{url: string, method: string, category: string, body?: array} $check One entry from get_checks().
 	 * @return array{blocked: bool, kind: string, message: string, cloudflare: string} `kind` is 'http' or 'network'; `cloudflare` is 'challenged', 'proxied', or ''.
 	 */
 	private function check_url( array $check ): array {
@@ -254,15 +251,18 @@ class IMGDT_Provider_Requests implements IMGDT_Diagnostics_Provider {
 		$is_local  = $this->is_local_url( $check['url'] );
 		$sslverify = apply_filters( $is_local ? 'https_local_ssl_verify' : 'https_ssl_verify', false );
 
-		$response = wp_remote_request(
-			$check['url'],
-			array(
-				'method'     => $check['method'],
-				'user-agent' => 'Imagify DevTools',
-				'sslverify'  => $sslverify,
-				'timeout'    => 10,
-			)
+		$args = array(
+			'method'     => $check['method'],
+			'user-agent' => 'Imagify DevTools',
+			'sslverify'  => $sslverify,
+			'timeout'    => 10,
 		);
+
+		if ( ! empty( $check['body'] ) ) {
+			$args['body'] = $check['body'];
+		}
+
+		$response = wp_remote_request( $check['url'], $args );
 
 		if ( is_wp_error( $response ) ) {
 			$result = array(
@@ -295,13 +295,9 @@ class IMGDT_Provider_Requests implements IMGDT_Diagnostics_Provider {
 	}
 
 	/**
-	 * Detect whether Cloudflare itself produced a response, using its own
-	 * documented headers rather than guessing from the status code alone.
-	 * `cf-mitigated: challenge` is Cloudflare's own signal that this
-	 * specific response is a challenge/block page it generated, not the
-	 * origin server's — a stronger, more precise claim than "this site
-	 * happens to be behind Cloudflare" (`cf-ray`, present on effectively any
-	 * Cloudflare-proxied response, block or not).
+	 * Detect Cloudflare from response headers: `cf-mitigated: challenge`
+	 * means Cloudflare generated the response; `cf-ray` means the site is
+	 * behind Cloudflare.
 	 *
 	 * @since 0.2.0
 	 *

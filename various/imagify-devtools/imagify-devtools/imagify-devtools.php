@@ -3,7 +3,7 @@
  * Plugin Name:       Imagify DevTools
  * Plugin URI:        https://github.com/wp-media/imagify-helpers/tree/master/various/imagify-devtools
  * Description:       Diagnostics and a live optimization trace for debugging Imagify installs.
- * Version:           0.2.0
+ * Version:           0.2.1
  * Requires at least: 6.0
  * Requires PHP:      8.1
  * Author:            WP Media
@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || die;
 /**
  * Plugin version. Also used as the enqueued assets' cache-busting suffix.
  */
-define( 'IMGDT_VERSION', '0.2.0' );
+define( 'IMGDT_VERSION', '0.2.1' );
 
 /**
  * Absolute path to the plugin's main file.

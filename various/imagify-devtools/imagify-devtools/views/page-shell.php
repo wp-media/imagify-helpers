@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || die;
 	</h1>
 
 	<?php if ( isset( $_GET['imgdt_error'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- display-only flag, no state change. ?>
-		<div class="notice notice-error"><p><?php esc_html_e( 'Something went wrong completing that action. Nothing else was affected — try again, and if it keeps happening, check your site\'s error log.', 'imagify-devtools' ); ?></p></div>
+		<div class="notice notice-error"><p><?php esc_html_e( 'The action could not be completed.', 'imagify-devtools' ); ?></p></div>
 	<?php endif; ?>
 
 	<nav class="nav-tab-wrapper imgdt-tabs">
@@ -43,8 +43,7 @@ defined( 'ABSPATH' ) || die;
 		<?php
 		$imgdt_tab_view = IMGDT_VIEWS_PATH . 'tabs/' . $this->get_tabs()[ $current ]['view'];
 
-		// A rendering bug in one tab must not blank the whole page — the
-		// title and tab nav above still work either way.
+		// A failing tab does not blank the title and tab nav.
 		$imgdt_tab_ok = imgdt_safe(
 			static function () use ( $imgdt_tab_view, $registry ) {
 				require $imgdt_tab_view;

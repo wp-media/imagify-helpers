@@ -71,10 +71,6 @@ class IMGDT_Attachment_Metabox {
 	 * @since 0.1.0
 	 */
 	public function init(): void {
-		if ( ! imgdt_current_user_can() ) {
-			return;
-		}
-
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ), -10 );
 		add_action( 'admin_print_styles-post.php', array( $this, 'enqueue_assets' ) );
 	}
@@ -85,6 +81,10 @@ class IMGDT_Attachment_Metabox {
 	 * @since 0.2.0
 	 */
 	public function enqueue_assets(): void {
+		if ( ! imgdt_current_user_can() ) {
+			return;
+		}
+
 		wp_enqueue_style( 'imgdt-admin', IMGDT_URL . 'assets/css/admin.css', array(), imgdt_asset_version( 'assets/css/admin.css' ) );
 	}
 
@@ -97,6 +97,10 @@ class IMGDT_Attachment_Metabox {
 		imgdt_safe(
 			function () {
 				global $post;
+
+				if ( ! imgdt_current_user_can() ) {
+					return;
+				}
 
 				if ( ! $post || 'attachment' !== $post->post_type || ! wp_attachment_is_image( $post->ID ) ) {
 					return;

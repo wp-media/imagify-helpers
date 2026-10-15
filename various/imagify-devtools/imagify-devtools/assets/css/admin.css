@@ -230,6 +230,26 @@
 	white-space: pre-line;
 }
 
+.imgdt-live-layout {
+	display: flex;
+	gap: 24px;
+	align-items: flex-start;
+}
+
+.imgdt-live-list {
+	width: 280px;
+	flex-shrink: 0;
+}
+
+.imgdt-live-list ul {
+	margin: 0;
+}
+
+.imgdt-live-detail {
+	flex: 1;
+	min-width: 0;
+}
+
 .imgdt-print-only {
 	display: none;
 }

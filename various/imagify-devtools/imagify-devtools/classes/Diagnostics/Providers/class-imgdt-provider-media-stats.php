@@ -8,11 +8,9 @@
 defined( 'ABSPATH' ) || die;
 
 /**
- * Media Library totals (optimized/unoptimized/error counts, space saved) and
- * site-wide next-gen coverage. Purely informational, no row here is ever
- * flagged — reuses Imagify's own official counting functions (the same ones
- * its own dashboard already calls) rather than re-deriving anything, so this
- * costs nothing beyond what Imagify's own admin screens already pay.
+ * Media Library totals (optimized, unoptimized and error counts, space
+ * saved) and next-gen coverage, from Imagify's own count functions.
+ * Informational: no row here is flagged.
  *
  * @since 0.2.0
  * @author Saransh Jain
@@ -93,11 +91,8 @@ class IMGDT_Provider_Media_Stats implements IMGDT_Diagnostics_Provider {
 	}
 
 	/**
-	 * Get the "optimized images still missing a next-gen version" row —
-	 * Imagify's own actionable number (transient-cached by Imagify itself,
-	 * auto-invalidated on optimize/restore/delete/settings-change), rather
-	 * than a full sitewide has-nextgen-or-not census, which doesn't exist
-	 * pre-built and would be expensive to compute from scratch.
+	 * Get the "optimized images missing next-gen" row, from Imagify's own
+	 * cached stat.
 	 *
 	 * @since 0.2.0
 	 *

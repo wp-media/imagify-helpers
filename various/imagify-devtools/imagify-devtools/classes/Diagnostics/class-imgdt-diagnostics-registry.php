@@ -64,9 +64,7 @@ class IMGDT_Diagnostics_Registry {
 		$this->sections = array();
 
 		foreach ( $this->default_providers() as $provider ) {
-			// Each provider runs in isolation: one throwing (an Imagify API
-			// that changed shape, an unusual host environment) must not
-			// blank out every other section.
+			// Each provider runs in isolation so one failure leaves the other sections intact.
 			$section = imgdt_safe( static fn() => $provider->get_section() );
 
 			if ( ! $section instanceof IMGDT_Diagnostic_Section ) {
@@ -77,10 +75,7 @@ class IMGDT_Diagnostics_Registry {
 						new IMGDT_Diagnostic_Row(
 							__( 'This section could not be loaded', 'imagify-devtools' ),
 							'',
-							true,
-							defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG
-								? __( 'See the PHP error log for details.', 'imagify-devtools' )
-								: __( 'Enable WP_DEBUG_LOG for details.', 'imagify-devtools' )
+							true
 						),
 					)
 				);

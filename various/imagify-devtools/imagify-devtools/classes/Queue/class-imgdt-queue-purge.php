@@ -25,16 +25,12 @@ class IMGDT_Queue_Purge {
 	 * @since 0.2.0
 	 */
 	public function purge(): void {
-		// Imagify's own reset service: process lock, legacy RPC transients,
-		// stale bulk-run flags, and Action Scheduler hooks. Multisite-aware
-		// already. Deliberately does not touch settings, API key, or caches
-		// unrelated to a running job.
+		// Imagify's reset service: process lock, legacy RPC transients, stale bulk-run flags, scheduler hooks.
 		if ( class_exists( '\Imagify\Tools\ResetInternalState' ) ) {
 			( new \Imagify\Tools\ResetInternalState() )->reset();
 		}
 
-		// ResetInternalState does not clear the batches themselves (the
-		// actual queued items) -- do that here, the same multisite-aware way.
+		// The reset service does not clear the queued batches themselves.
 		$this->delete_batches();
 	}
 

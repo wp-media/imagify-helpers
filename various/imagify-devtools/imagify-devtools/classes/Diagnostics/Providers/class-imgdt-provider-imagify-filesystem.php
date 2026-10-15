@@ -25,7 +25,7 @@ class IMGDT_Provider_Imagify_Filesystem implements IMGDT_Diagnostics_Provider {
 				__( 'Imagify Filesystem is unavailable', 'imagify-devtools' ),
 				'',
 				true,
-				__( 'Activate Imagify to get more data here.', 'imagify-devtools' )
+				__( 'Imagify is not active.', 'imagify-devtools' )
 			);
 
 			return new IMGDT_Diagnostic_Section( 'imagify-filesystem', __( 'Imagify Filesystem', 'imagify-devtools' ), $rows );

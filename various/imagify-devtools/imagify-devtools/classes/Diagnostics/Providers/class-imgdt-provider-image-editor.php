@@ -13,6 +13,20 @@ defined( 'ABSPATH' ) || die;
 class IMGDT_Provider_Image_Editor implements IMGDT_Diagnostics_Provider {
 
 	/**
+	 * Mime types an editor must support to count as usable.
+	 *
+	 * @var string[]
+	 */
+	private const REQUIRED_MIME_TYPES = array( 'image/jpeg', 'image/png', 'image/gif' );
+
+	/**
+	 * Next-gen mime types: reported per editor, not required for selection.
+	 *
+	 * @var string[]
+	 */
+	private const OPTIONAL_MIME_TYPES = array( 'image/webp', 'image/avif' );
+
+	/**
 	 * Methods Imagify actually calls on the image editor, so we can flag an
 	 * implementation early if one of them is missing.
 	 *
@@ -122,7 +136,7 @@ class IMGDT_Provider_Image_Editor implements IMGDT_Diagnostics_Provider {
 	private function test_args(): array {
 		return array(
 			'path'       => $this->test_image_path(),
-			'mime_types' => IMGDT_Tools::get_mime_types( 'image' ),
+			'mime_types' => self::REQUIRED_MIME_TYPES,
 			'methods'    => $this->required_methods(),
 		);
 	}
@@ -141,7 +155,7 @@ class IMGDT_Provider_Image_Editor implements IMGDT_Diagnostics_Provider {
 				! $selected,
 				sprintf(
 					/* translators: 1 and 2 are values. */
-					__( 'Should be %1$s or %2$s most of the time.', 'imagify-devtools' ),
+					__( 'Should be %1$s or %2$s.', 'imagify-devtools' ),
 					'<code>Imagick</code>',
 					'<code>GD</code>'
 				)
@@ -150,10 +164,7 @@ class IMGDT_Provider_Image_Editor implements IMGDT_Diagnostics_Provider {
 
 		$candidates = array_unique( array_filter( array_merge( array( $selected ), array( 'WP_Image_Editor_Imagick', 'WP_Image_Editor_GD' ) ) ) );
 
-		// A single implementation failing isn't a problem as long as another
-		// one was actually selected — only flag the individual rows red when
-		// nothing at all qualifies (the "Selected Image Editor: None" case
-		// above already covers that as the real, critical failure).
+		// Individual rows are flagged only when no editor was selected.
 		$flag_individual_failures = ! $selected;
 
 		foreach ( $candidates as $implementation ) {
@@ -235,6 +246,22 @@ class IMGDT_Provider_Image_Editor implements IMGDT_Diagnostics_Provider {
 			);
 		}
 
-		return new IMGDT_Diagnostic_Row( $name, 'OK' );
+		$unsupported_next_gen = array_filter(
+			self::OPTIONAL_MIME_TYPES,
+			static fn( $mime_type ) => ! call_user_func( array( $implementation, 'supports_mime_type' ), $mime_type )
+		);
+
+		return new IMGDT_Diagnostic_Row(
+			$name,
+			'OK',
+			false,
+			$unsupported_next_gen
+				? sprintf(
+					/* translators: %s is a list of mime types. */
+					__( 'Not supported: %s.', 'imagify-devtools' ),
+					implode( ', ', $unsupported_next_gen )
+				)
+				: ''
+		);
 	}
 }

@@ -13,9 +13,19 @@
 defined( 'ABSPATH' ) || die;
 
 $queue = $this->get_queue_status();
+
+if ( ! $queue['available'] ) {
+	$queue_label = __( 'unavailable', 'imagify-devtools' );
+} elseif ( $queue['paused'] ) {
+	$queue_label = __( 'paused', 'imagify-devtools' );
+} elseif ( $queue['active'] ) {
+	$queue_label = __( 'active', 'imagify-devtools' );
+} else {
+	$queue_label = __( 'idle', 'imagify-devtools' );
+}
 ?>
 <div class="wrap imgdt-wrap">
-	<h1>Imagify DevTools — Live</h1>
+	<h1><?php esc_html_e( 'Imagify DevTools — Live', 'imagify-devtools' ); ?></h1>
 
 	<p>
 		<a href="<?php echo esc_url( admin_url( 'admin.php?page=' . IMGDT_Admin_Pages::SLUG ) ); ?>">
@@ -28,25 +38,24 @@ $queue = $this->get_queue_status();
 	<?php endif; ?>
 
 	<p class="description">
-		Queue:
-		<?php if ( ! $queue['available'] ) : ?>
-			unavailable
-		<?php elseif ( $queue['paused'] ) : ?>
-			paused
-		<?php elseif ( $queue['active'] ) : ?>
-			active
-		<?php else : ?>
-			idle
-		<?php endif; ?>
+		<?php
+		echo esc_html(
+			sprintf(
+				/* translators: %s is the queue state: unavailable, paused, active or idle. */
+				__( 'Queue: %s', 'imagify-devtools' ),
+				$queue_label
+			)
+		);
+		?>
 	</p>
 
-	<div style="display:flex;gap:24px;align-items:flex-start">
-		<div style="width:280px;flex-shrink:0">
-			<h2>Recently active</h2>
+	<div class="imgdt-live-layout">
+		<div class="imgdt-live-list">
+			<h2><?php esc_html_e( 'Recently active', 'imagify-devtools' ); ?></h2>
 			<?php if ( ! $recent ) : ?>
-				<p class="description">Nothing recorded yet. Trigger an optimization to see it here.</p>
+				<p class="description"><?php esc_html_e( 'No optimizations recorded.', 'imagify-devtools' ); ?></p>
 			<?php else : ?>
-				<ul style="margin:0">
+				<ul>
 					<?php foreach ( $recent as $id ) : ?>
 						<li>
 							<a href="<?php echo esc_url( IMGDT_Live_Page::url( array( 'media' => $id ) ) ); ?>">
@@ -58,17 +67,17 @@ $queue = $this->get_queue_status();
 			<?php endif; ?>
 		</div>
 
-		<div style="flex:1;min-width:0">
+		<div class="imgdt-live-detail">
 			<?php if ( ! $media_id ) : ?>
-				<p class="description">Select a media on the left.</p>
+				<p class="description"><?php esc_html_e( 'Select an image.', 'imagify-devtools' ); ?></p>
 			<?php else : ?>
 				<h2><?php echo esc_html( get_the_title( $media_id ) ?: '#' . $media_id ); ?></h2>
 				<table class="widefat striped imgdt-table">
 					<thead>
 						<tr>
-							<th>Time</th>
-							<th>Step</th>
-							<th>Detail</th>
+							<th><?php esc_html_e( 'Time', 'imagify-devtools' ); ?></th>
+							<th><?php esc_html_e( 'Step', 'imagify-devtools' ); ?></th>
+							<th><?php esc_html_e( 'Detail', 'imagify-devtools' ); ?></th>
 						</tr>
 					</thead>
 					<tbody id="imgdt-live-events"></tbody>
@@ -84,16 +93,32 @@ $queue = $this->get_queue_status();
 	var url = <?php echo wp_json_encode( IMGDT_Live_Page::poll_url( $media_id ) ); ?>;
 	var body = document.getElementById( 'imgdt-live-events' );
 
+	function cell( text ) {
+		var td = document.createElement( 'td' );
+		td.textContent = text;
+		return td;
+	}
+
 	function poll() {
 		fetch( url, { credentials: 'same-origin' } )
 			.then( function ( response ) { return response.json(); } )
 			.then( function ( data ) {
-				body.innerHTML = ( data.events || [] ).map( function ( event ) {
+				var rows = document.createDocumentFragment();
+
+				( data.events || [] ).forEach( function ( event ) {
+					var row = document.createElement( 'tr' );
 					var detail = event.detail && Object.keys( event.detail ).length
 						? JSON.stringify( event.detail )
 						: '';
-					return '<tr><td>' + event.time + '</td><td>' + event.step + '</td><td>' + detail + '</td></tr>';
-				} ).join( '' );
+
+					row.appendChild( cell( event.time ) );
+					row.appendChild( cell( event.step ) );
+					row.appendChild( cell( detail ) );
+					rows.appendChild( row );
+				} );
+
+				body.textContent = '';
+				body.appendChild( rows );
 			} )
 			.catch( function () {} );
 	}

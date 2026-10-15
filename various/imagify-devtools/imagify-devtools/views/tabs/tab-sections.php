@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || die;
 $sections = $registry->get_sections();
 ?>
 <p class="description imgdt-toolbar">
-	<?php esc_html_e( 'Sections with a problem are expanded automatically. Everything else stays collapsed until you need it.', 'imagify-devtools' ); ?>
+	<?php esc_html_e( 'Sections with a flagged row are expanded.', 'imagify-devtools' ); ?>
 	<button type="button" class="button button-small imgdt-toggle-all" data-state="collapsed"><?php esc_html_e( 'Expand all', 'imagify-devtools' ); ?></button>
 </p>
 

@@ -8,14 +8,10 @@
 defined( 'ABSPATH' ) || die;
 
 /**
- * Same mechanism as WP Media's own `imagify-dont-use-imagemagick.php` helper
- * snippet: moves `WP_Image_Editor_Imagick` to the end of the `wp_image_editors`
- * list, so GD is tried first if it's available. Imagick stays available as a
- * fallback — this reorders, it does not remove or disable it.
- *
- * Only ever touches the literal core `WP_Image_Editor_Imagick` class name.
- * A third-party plugin's own editor (e.g. FooGallery's or Jetpack's, which
- * register a different class) is never matched or altered by this filter.
+ * Moves `WP_Image_Editor_Imagick` to the end of the `wp_image_editors`
+ * list so GD is tried first. Imagick stays available as a fallback. Only
+ * the core class name is matched; a third-party editor class is never
+ * altered.
  *
  * Based on the `imagify-dont-use-imagemagick.php` helper plugin.
  *

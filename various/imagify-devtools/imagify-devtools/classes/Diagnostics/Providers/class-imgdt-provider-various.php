@@ -138,8 +138,8 @@ class IMGDT_Provider_Various implements IMGDT_Diagnostics_Provider {
 					)
 					: ''
 			),
-			new IMGDT_Diagnostic_Row( __( 'Your user ID', 'imagify-devtools' ), get_current_user_id() ),
-			new IMGDT_Diagnostic_Row( __( 'Your IP address', 'imagify-devtools' ), imgdt_get_ip() ),
+			new IMGDT_Diagnostic_Row( __( 'User ID', 'imagify-devtools' ), get_current_user_id() ),
+			new IMGDT_Diagnostic_Row( __( 'IP address', 'imagify-devtools' ), imgdt_get_ip() ),
 			new IMGDT_Diagnostic_Row( __( 'Imagify settings', 'imagify-devtools' ), $this->redact( get_site_option( 'imagify_settings' ) ) ),
 			new IMGDT_Diagnostic_Row(
 				__( 'Imagify user', 'imagify-devtools' ),
@@ -155,11 +155,9 @@ class IMGDT_Provider_Various implements IMGDT_Diagnostics_Provider {
 	}
 
 	/**
-	 * Mask values that can hold credentials or a live session: the Imagify
-	 * API key in the settings, and cookies, auth headers and credential-style
-	 * environment variables in `$_SERVER`. This output ends up in
-	 * screenshots, the Copy report and the PDF, all of which get sent to
-	 * support.
+	 * Mask credential-style values (the Imagify API key, cookies, auth
+	 * headers, secret-like variables in `$_SERVER`) before they reach the
+	 * screen, the Copy report or the PDF.
 	 *
 	 * @since 0.2.0
 	 *
